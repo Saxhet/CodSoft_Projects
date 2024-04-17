@@ -51,7 +51,7 @@ if 0<=user_choice<=2:
 else:
         print("invalid number ")
 
-user_response=input("wanna  a play again ").lower
+user_response=input("wanna  a play again ").lower()
 if user_response=="yes":
         print("Run Again")
 else :
