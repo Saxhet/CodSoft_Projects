@@ -26,10 +26,6 @@ scissors = '''
 ---.__(___)
 '''
 
-# A="APPLE"
-# B="BAT"
-# C="CAT"
-# listx=[A,B,C]print(listx[0])
 listopt=[rock,paper,scissors]
 user_choice=int(input("select 0 for rock ,1 for paper ,and 2 for scissors "))
 if 0<=user_choice<=2:
@@ -55,5 +51,10 @@ if 0<=user_choice<=2:
 else:
         print("invalid number ")
 
+user_response=input("wanna  a play again ").lower
+if user_response=="yes":
+        print("Run Again")
+else :
+        print("thankyou for playing")
 
 
