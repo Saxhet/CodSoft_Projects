@@ -4,37 +4,43 @@ tasks_todo = []
 tasks_removed = []
 
 def add_task():
-
-  task = entry_task.get()
-  if task:
-    tasks_todo.append(task)
-    insert_task_into_listbox(listbox_todo, task, True)  
-    entry_task.delete(0, END)
-  else:
-    print("Please enter a task.")
+    task = entry_task.get()
+    if task:
+        tasks_todo.append(task)
+        insert_task_into_listbox(listbox_todo, task, True)
+        entry_task.delete(0, END)
+    else:
+        print("Please enter a task.")
 
 def remove_task():
-  
-  selected_index = listbox_todo.curselection()
-  if selected_index:
-    task = listbox_todo.get(selected_index[0])
-    tasks_todo.pop(selected_index[0])
-    tasks_removed.append(task)
-    insert_task_into_listbox(listbox_removed, task, False)  
-    listbox_todo.delete(selected_index[0])
-  else:
-    print("Please select a task to remove.")
+    selected_index = listbox_todo.curselection()
+    if selected_index:
+        task = listbox_todo.get(selected_index[0])
+        tasks_todo.pop(selected_index[0])
+        tasks_removed.append(task)
+        insert_task_into_listbox(listbox_removed, task, False)
+        listbox_todo.delete(selected_index[0])
+    else:
+        print("Please select a task to remove.")
+
+def remove_done_task():
+    selected_index = listbox_removed.curselection()
+    if selected_index:
+        task = listbox_removed.get(selected_index[0])
+        tasks_removed.pop(selected_index[0])
+        listbox_removed.delete(selected_index[0])
+    else:
+        print("Please select a task to delete.")
 
 def insert_task_into_listbox(listbox, task, with_checkbox):
- 
-  if with_checkbox:
-    listbox.insert(END, f"  {task}") 
-  else:
-    listbox.insert(END, task)
+    if with_checkbox:
+        listbox.insert(END, f"  {task}")
+    else:
+        listbox.insert(END, task)
 
 window = Tk()
 window.title("To-Do List")
-window.config(bg="#d0e3f0")  
+window.config(bg="#d0e3f0")
 
 label_task = Label(window, text="Enter new task:", font=("Arial", 12))
 label_task.pack()
@@ -42,11 +48,9 @@ label_task.pack()
 entry_task = Entry(window, width=50, font=("Arial", 12))
 entry_task.pack()
 
-
 button_add = Button(window, text="Add Task", command=add_task, font=("Arial", 12))
-button_add.config(bg="#4CAF50", fg="white", activebackground="#388E3C")  
+button_add.config(bg="#4CAF50", fg="white", activebackground="#388E3C")
 button_add.pack()
-
 
 frame_todo = Frame(window)
 frame_todo.pack()
@@ -66,10 +70,13 @@ label_removed.pack()
 listbox_removed = Listbox(frame_removed, width=50, font=("Courier New", 14))
 listbox_removed.pack()
 
-
-button_remove = Button(window, text="DONE", command=remove_task, font=("Arial", 12))
-button_remove.config(bg="#F44336", fg="white", activebackground="#B71C1C")  
-
+button_remove = Button(window, text="Mark as Done", command=remove_task, font=("Arial", 12))
+button_remove.config(bg="#F44336", fg="white", activebackground="#B71C1C")
 button_remove.pack()
 
+button_delete_done = Button(window, text="Delete Task", command=remove_done_task, font=("Arial", 12))
+button_delete_done.config(bg="#FF9800", fg="white", activebackground="#EF6C00")
+button_delete_done.pack()
+
 window.mainloop()
+  
